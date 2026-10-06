@@ -641,91 +641,60 @@ planButtons.forEach(btn => {
 });
 
 
-finishBtn.addEventListener(
-  "click",
-  () => {
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbw7kB1H0wOjrbaM_qfPABz9YKY4477leUwAAEJepxzfXrTY4aFD1xIMM90nDYKr_DZ0QA/exec";
 
-    if (!state.plan) return;
+finishBtn.addEventListener("click", async () => {
+  if (!state.date || !state.time || !state.plan) return;
 
-    const pickedDate =
-      new Date(
-        `${state.date}T12:00:00`
-      );
+  finishBtn.disabled = true;
+  finishBtn.textContent = "sending... ♡";
 
-    const formattedDate =
-      pickedDate.toLocaleDateString(
-        "en-US",
-        {
-          weekday: "long",
-          month: "long",
-          day: "numeric"
-        }
-      );
+  const pickedDate = new Date(`${state.date}T12:00:00`);
 
-    document
-      .getElementById(
-        "summaryDate"
-      )
-      .textContent =
-        formattedDate;
-
-    document
-      .getElementById(
-        "summaryTime"
-      )
-      .textContent =
-        state.time;
-
-    document
-      .getElementById(
-        "summaryPlan"
-      )
-      .textContent =
-        state.plan;
-
-    showStep("step-final");
-  }
-);
-
-
-/* =========================================================
-   COPY FINAL PLAN
-========================================================= */
-
-document
-  .getElementById("copyBtn")
-  .addEventListener(
-    "click",
-    async () => {
-
-      const text =
-`It’s a date ♡
-📅 ${document.getElementById("summaryDate").textContent}
-🕒 ${state.time}
-🍴 ${state.plan}`;
-
-      try {
-
-        await navigator.clipboard
-          .writeText(text);
-
-        document
-          .getElementById(
-            "copyStatus"
-          )
-          .textContent =
-            "copied ♡";
-
-      } catch {
-
-        document
-          .getElementById(
-            "copyStatus"
-          )
-          .textContent =
-            "screenshot this and send it to me ♡";
-
-      }
-
+  const formattedDate = pickedDate.toLocaleDateString(
+    "en-US",
+    {
+      weekday: "long",
+      month: "long",
+      day: "numeric"
     }
   );
+
+  const formData = new URLSearchParams();
+
+  formData.append("date", state.date);
+  formData.append("time", state.time);
+  formData.append("food", state.plan);
+
+  try {
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: formData
+    });
+
+    document.getElementById("summaryDate").textContent =
+      formattedDate;
+
+    document.getElementById("summaryTime").textContent =
+      state.time;
+
+    document.getElementById("summaryPlan").textContent =
+      state.plan;
+
+    showStep("step-final");
+
+  } catch (error) {
+    console.error("Submission failed:", error);
+
+    alert("Something went wrong. Please try again ♡");
+
+  } finally {
+    finishBtn.disabled = false;
+    finishBtn.textContent = "lock it in ♡";
+  }
+});
+
+
+
