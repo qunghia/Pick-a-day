@@ -1,0 +1,491 @@
+:root {
+  --bg: #f6f1ed;
+  --card: #fffdfb;
+  --text: #4a3838;
+  --muted: #9a8584;
+  --accent: #c94f6d;
+  --accent-dark: #a63e58;
+  --line: #eadfda;
+  --soft: #f3e3e5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,.9), transparent 38%),
+    linear-gradient(180deg, #f8f4f1 0%, #f1e9e5 100%);
+  color: var(--text);
+  font-family: "DM Sans", sans-serif;
+}
+
+body {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding:
+    max(22px, env(safe-area-inset-top))
+    18px
+    max(22px, env(safe-area-inset-bottom));
+}
+
+.page {
+  width: min(100%, 430px);
+}
+
+.card {
+  position: relative;
+  display: none;
+  width: 100%;
+  padding: 34px 24px 26px;
+  background: rgba(255, 253, 251, .94);
+  border: 1px solid rgba(170, 135, 130, .15);
+  border-radius: 28px;
+  box-shadow:
+    0 20px 60px rgba(92, 58, 58, .10),
+    0 2px 8px rgba(92, 58, 58, .04);
+  text-align: center;
+  animation: rise .35s ease both;
+}
+
+.card.active {
+  display: block;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px) scale(.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.tiny {
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.flower {
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto 24px;
+  background: transparent;
+  border-radius: 0;
+  color: var(--accent);
+  font-size: 34px;
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -.025em;
+}
+
+h1 {
+  font-size: clamp(38px, 10vw, 52px);
+  margin-top: 36px;
+}
+
+h2 {
+  font-size: clamp(34px, 9vw, 46px);
+}
+
+em {
+  color: var(--accent);
+}
+
+.sub {
+  max-width: 300px;
+  margin: 16px auto 24px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn {
+  min-height: 50px;
+  border: 0;
+  border-radius: 15px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .16s ease, background .16s ease, opacity .16s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active {
+  transform: scale(.98);
+}
+
+.primary {
+  background: var(--accent);
+  color: white;
+}
+
+.primary:hover {
+  background: var(--accent-dark);
+}
+
+.ghost {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--text);
+}
+
+.wide {
+  width: 100%;
+  margin-top: 18px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .42;
+}
+
+.back {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.date-box {
+  display: block;
+  margin-top: 18px;
+  text-align: left;
+}
+
+.date-box span {
+  display: block;
+  margin: 0 0 8px 3px;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.date-box input {
+  width: 100%;
+  min-height: 58px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 0 16px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  font-size: 16px;
+  outline: none;
+}
+
+.choice-grid {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.time-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.plan-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.choice {
+  min-height: 56px;
+  padding: 13px 10px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.choice:hover {
+  transform: translateY(-1px);
+}
+
+.choice.selected {
+  border-color: var(--accent);
+  background: var(--soft);
+}
+
+.plan {
+  min-height: 86px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 5px;
+}
+
+.emoji {
+  font-size: 24px;
+}
+
+.final-card {
+  padding-top: 40px;
+}
+
+.confetti {
+  margin-bottom: 10px;
+  color: var(--accent);
+  letter-spacing: .3em;
+}
+
+.yay {
+  color: var(--accent);
+  font-size: clamp(50px, 14vw, 68px);
+}
+
+.summary {
+  display: grid;
+  gap: 10px;
+  margin: 24px 0;
+  padding: 8px 0;
+}
+
+.summary > div {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  align-items: center;
+  min-height: 54px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: #fff;
+  text-align: left;
+}
+
+.summary span {
+  font-size: 20px;
+}
+
+.summary strong {
+  font-size: 14px;
+}
+
+.closing {
+  margin: 22px 0 4px;
+  font-family: "Playfair Display", serif;
+  font-size: 23px;
+  font-style: italic;
+}
+
+.micro {
+  min-height: 18px;
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Intro buttons */
+.cta-area {
+  position: relative;
+  margin-top: 8px;
+  min-height: 130px;
+}
+
+.yes-btn,
+.no-btn {
+  width: calc(50% - 5px);
+  height: 50px;
+  min-height: 50px;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.yes-btn {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.no-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+}
+
+/* Once JS moves NO to <body>, it is truly viewport-fixed. */
+.no-btn.moving {
+  position: fixed;
+  right: auto;
+  bottom: auto;
+  margin: 0;
+  transform: none;
+  z-index: 99999;
+  transition:
+    left .16s ease,
+    top .16s ease,
+    background .16s ease,
+    border-color .16s ease;
+}
+
+.no-btn.moving:active {
+  transform: none;
+}
+
+.calendar {
+  margin-top: 24px;
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+
+  margin-bottom: 18px;
+}
+
+.calendar-header h3 {
+  margin: 0;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  color: var(--text);
+}
+
+.calendar-header button {
+  width: 38px;
+  height: 38px;
+
+  border: 1px solid var(--line);
+  border-radius: 50%;
+
+  background: white;
+
+  color: var(--text);
+
+  cursor: pointer;
+
+  font-size: 17px;
+}
+
+
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, 1fr);
+
+  gap: 6px;
+}
+
+
+.calendar-weekdays {
+  margin-bottom: 8px;
+}
+
+.calendar-weekdays span {
+  color: var(--muted);
+
+  font-size: 11px;
+  font-weight: 500;
+
+  text-align: center;
+}
+
+
+.calendar-day {
+  aspect-ratio: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: var(--text);
+
+  font: inherit;
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+
+.calendar-day:hover:not(:disabled) {
+  background: var(--soft);
+
+  transform: scale(1.05);
+}
+
+
+.calendar-day.today {
+  border: 1px solid var(--accent);
+}
+
+
+.calendar-day.selected {
+  background: var(--accent);
+
+  color: white;
+
+  border: 0;
+}
+
+
+.calendar-day.past {
+  color: #d8ceca;
+
+  cursor: default;
+}
+
+
+.calendar-day:disabled {
+  opacity: 0.45;
+}
+
+
+.calendar-empty {
+  aspect-ratio: 1;
+}
+
+@media (max-width: 360px) {
+  .card {
+    padding-left: 18px;
+    padding-right: 18px;
+    border-radius: 24px;
+  }
+}

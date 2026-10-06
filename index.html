@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f8f4f1" />
+  <title>pick a day? ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main class="page">
+    <section class="card active" id="step-intro">
+      <!-- <div class="tiny">one very important question</div> -->
+      <div class="flower">(❁´◡`❁)</div>
+
+      <h1>will you go on a<br><em>date with me?</em></h1>
+      <!--  <p class="sub">no pressure btw. except there is only one correct answer.</p> -->
+
+      <div class="cta-area" id="ctaArea">
+        <button class="btn primary yes-btn" id="yesBtn">yes ♡</button>
+        <button class="btn ghost no-btn" id="noBtn">no</button>
+      </div>
+    </section>
+
+    <section class="card" id="step-date">
+      <button class="back" data-back="step-intro">←</button>
+      <div class="tiny">okayyy, next question (●'◡'●)</div>
+      <h2>so… when are<br><em>you free?</em></h2>
+      <!-- <p class="sub">pick a day that works for you</p> -->
+
+      <div class="calendar">
+      <div class="calendar-header">
+        <button id="prevMonth" type="button">←</button>
+        <h3 id="monthYear"></h3>
+        <button id="nextMonth" type="button">→</button>
+      </div>
+
+      <div class="calendar-weekdays">
+        <span>Sun</span>
+        <span>Mon</span>
+        <span>Tue</span>
+        <span>Wed</span>
+        <span>Thu</span>
+        <span>Fri</span>
+        <span>Sat</span>
+      </div>
+
+      <div class="calendar-days" id="calendarDays"></div>
+    </div>
+
+    <button class="btn primary wide" id="dateNext" disabled>
+      next →
+    </button>
+    </section>
+
+    <section class="card" id="step-time">
+      <button class="back" data-back="step-date">←</button>
+      <!-- <div class="tiny">choose your fighter</div> -->
+      <h2>what time<br><em>feels right?</em></h2>
+      <p class="sub" id="timeSubtitle"></p>
+
+      <div class="choice-grid time-grid" id="timeGrid"></div>
+
+      <button class="btn primary wide" id="timeNext" disabled>
+        next →
+      </button>
+    </section>
+
+    <section class="card" id="step-plan">
+      <button class="back" data-back="step-time">←</button>
+      <!-- <div class="tiny">last one, promise</div> -->
+      <h2>what are we<br><em>feeling?</em></h2>
+
+      <div class="choice-grid plan-grid">
+        <button class="choice plan" data-plan="Coffee">
+          <span class="emoji">☕️</span><span>Coffee</span>
+        </button>
+        <button class="choice plan" data-plan="Pasta">
+          <span class="emoji">🍝</span><span>Pasta</span>
+        </button>
+        <button class="choice plan" data-plan="Sushi">
+          <span class="emoji">🍣</span><span>Sushi</span>
+        </button>
+        <button class="choice plan" data-plan="Dessert">
+          <span class="emoji">🍰</span><span>Dessert</span>
+        </button>
+        <button class="choice plan" data-plan="Movie">
+          <span class="emoji">🎬</span><span>Movie</span>
+        </button>
+        <button class="choice plan" data-plan="Surprise me">
+          <span class="emoji">🎲</span><span>Surprise me</span>
+        </button>
+      </div>
+
+      <button class="btn primary wide" id="finishBtn" disabled>lock it in (✿◕‿◕✿)</button>
+    </section>
+
+    <section class="card final-card" id="step-final">
+      <div class="confetti">☆*: .｡. o(≧▽≦)o .｡.:*☆</div>
+      <h2 class="yay">YAY!!</h2>
+      <p class="sub">okay, it’s officially a date.</p>
+
+      <div class="summary">
+        <div>
+          <span>📅</span>
+          <strong id="summaryDate">—</strong>
+        </div>
+        <div>
+          <span>🕒</span>
+          <strong id="summaryTime">—</strong>
+        </div>
+        <div>
+          <span>🍴</span>
+          <strong id="summaryPlan">—</strong>
+        </div>
+      </div>
+
+      <p class="closing">can’t wait to see you (/≧▽≦)/</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
