@@ -667,23 +667,26 @@ finishBtn.addEventListener("click", async () => {
   formData.append("time", state.time);
   formData.append("food", state.plan);
 
-  try {
-    await fetch(GOOGLE_SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      body: formData
-    });
+try {
+  // Hiển thị thông tin đã chọn
+  document.getElementById("summaryDate").textContent =
+    formattedDate;
 
-    document.getElementById("summaryDate").textContent =
-      formattedDate;
+  document.getElementById("summaryTime").textContent =
+    state.time;
 
-    document.getElementById("summaryTime").textContent =
-      state.time;
+  document.getElementById("summaryPlan").textContent =
+    state.plan;
 
-    document.getElementById("summaryPlan").textContent =
-      state.plan;
+  // Hiện YAY ngay lập tức
+  showStep("step-final");
 
-    showStep("step-final");
+  // Gửi Google Sheets trong lúc hiển thị YAY
+  await fetch(GOOGLE_SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: formData
+  });
 
   } catch (error) {
     console.error("Submission failed:", error);
