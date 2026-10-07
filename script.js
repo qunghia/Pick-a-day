@@ -37,7 +37,7 @@ const noTexts = [
   "try again mahh",
   "still no?!?",
   "naurr 😭",
-  "just say yes (～￣▽￣)～ ",
+  "just say yes (～￣▽￣)～",
   "wrong answer",
   "one more try",
   "pliss? 😭"
